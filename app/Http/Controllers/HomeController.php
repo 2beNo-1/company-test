@@ -26,15 +26,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-//        return view('pages.staff');
-//        return view('pages.administrator');
-        return view('pages.ceo');
+        $user = Auth::user();
+        if ($user->hasRole('CEO'))
+            return view('pages.ceo');
+        if ($user->hasRole('Manager'))
+            return view('pages.administrator');
+        return view('pages.staff');
     }
 
     public function workData()
     {
         $works = Auth::user()->staff->works;
-//        dd($works);
         $res = [];
         foreach ($works as $work){
             $arr = [];
@@ -56,7 +58,6 @@ class HomeController extends Controller
     public function staffData()
     {
         $staff = Auth::user()->staffs;
-//        dd($staff);
         $res = [];
         foreach ($staff as $s){
             $arr = [];
@@ -77,7 +78,6 @@ class HomeController extends Controller
     public function allData()
     {
         $users = User::where('id', '<>', Auth::user()->id)->get();
-//        dd($staff);
         $res = [];
         foreach ($users as $user){
             $arr = [];

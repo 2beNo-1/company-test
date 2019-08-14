@@ -18,6 +18,7 @@ class UsersTableSeeder extends Seeder
         User::insert($users->toArray());
 
         $user = User::find(1);
+        $user->assignRole('CEO');
         $user->name = 'CEO';
         $user->email = 'CEO@mail.com';
         $user->password = \Hash::make('ceo@123456');
@@ -25,6 +26,7 @@ class UsersTableSeeder extends Seeder
 
         for ($i = 2; $i < 5; $i++){
             $user = User::find($i);
+            $user->assignRole('Manager');
             $user->name = 'admin' . $i;
             $user->email = 'admin' . $i . '@mail.com';
             $user->password = \Hash::make('admin' . $i .'@123456');
