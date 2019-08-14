@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Work extends Model
 {
-    protected $table = 'works';
     protected $fillable = ['staff_id', 'content',];
+
+    public function staff()
+    {
+        return $this->belongsTo(Staff::class);
+    }
 }
